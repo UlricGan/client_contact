@@ -1,0 +1,65 @@
+*{
+  font-size: 20px;
+  font-family: 'Brokman-Regular','Helvetica Neue',Helvetica,sans-serif;
+}
+
+.button{
+  border: 1px #4e4e4e solid;
+  width: 80px;
+}
+
+.button:hover{
+  background-color: #424297;
+  color: white;
+  cursor: pointer;
+}
+
+label{
+  display: inline-block;
+  width: 100px;
+}
+
+table{
+  border-collapse: collapse;
+  border: 1px black solid;
+  text-align: center;
+  margin-top: 20px;
+}
+
+td,th{
+  border: 1px #747474 solid;
+}
+
+th{
+  background-color: #cac8c8;
+}
+
+.c_name{
+  width: 100px;
+}
+
+.c_phno{
+  width: 150px;
+}
+
+.c_email{
+  width: 250px;
+}
+
+.c_address{
+  width: 250px;
+}
+
+.c_operate{
+  width: 100px;
+}
+
+.operate, .edit, .delete{
+  cursor: pointer;
+}
+
+.operate:hover, .edit:hover, .delete:hover{
+  color: #545dd7;
+  text-decoration: underline;
+}
+
