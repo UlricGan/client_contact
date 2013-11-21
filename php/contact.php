@@ -10,12 +10,12 @@
   $result=mysql_query($sql,$con);
   while($row=mysql_fetch_array($result)){
     echo "<tr>";
-    echo "<td><a class='delete'>删除</a></td>";
+    echo "<td><a class='delete change'>删除</a></td>";
     echo "<td >" . $row['name'] . "</td>";
     echo "<td>" . $row['phno'] . "</td>";
     echo "<td>" . $row['email'] . "</td>";
     echo "<td>" . $row['address'] . "</td>";
-    echo "<td><a class='operate'>编辑</a></td>";
+    echo "<td><a class='operate change'>编辑</a></td>";
     echo "</tr>";
   }
   mysql_close($con);
