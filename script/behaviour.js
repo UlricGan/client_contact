@@ -10,30 +10,13 @@ $(document).ready(function(){
       });
   });
   
-  $("#add_submit").click(function(){
-    event.preventDefault();
-    var add_name=$("#add_cname").val();
-    var add_phno=$("#add_phno").val();
-    var add_email=$("#add_email").val();
-    var add_address=$("#add_address").val();
-    url="php/add_contact.php";
-    $.post(url,{
-      name:add_name, 
-      phno:add_phno, 
-      email:add_email, 
-      address:add_address
-      },function(data){
-        $("#add_tip").html(data);
-      });
-  });
-  
   $(document).on('click','.operate',function(){
     var operate=$(this).parent();
     var address=operate.prev().text();
     var email=operate.prev().prev().text();
     var phno=operate.prev().prev().prev().text();
     var name=operate.prev().prev().prev().prev().text();
-    $(this).parent().parent().html("<td><a class='delete'>删除</a></td><td>"+name+"</td><td><input type='text' value='"+phno+"'></td><td><input type='text' value='"+email+"'></td><td><input type='text' value='"+address+"'></td><td><a class='edit'>保存</a></td>");    
+    $(this).parent().parent().html("<td><a class='change delete'>删除</a></td><td>"+name+"</td><td><input type='text' value='"+phno+"'></td><td><input type='text' value='"+email+"'></td><td><input type='text' value='"+address+"'></td><td><a class='edit change'>保存</a></td>");    
   });
   
   $(document).on('click','.edit',function(){
@@ -51,7 +34,7 @@ $(document).ready(function(){
       },function(data){
         $("#edit_tip").html(data);
       });
-    $(this).parent().parent().html("<td><a class='delete'>删除</a></td><td>"+edit_name+"</td><td>"+edit_phno+"</td><td>"+edit_email+"</td><td>"+edit_address+"</td><td><a class='operate'>编辑</a></td>");
+    $(this).parent().parent().html("<td><a class='change delete'>删除</a></td><td>"+edit_name+"</td><td>"+edit_phno+"</td><td>"+edit_email+"</td><td>"+edit_address+"</td><td><a class='operate change'>编辑</a></td>");
   });
   
   $(document).on('click','.delete',function(){
@@ -64,4 +47,24 @@ $(document).ready(function(){
     });
   });
   
+  $("#add").click(function() {
+    event.preventDefault();
+    $("#contact").prepend("<tr><td><a class='change delete'>删除</a></td><td><input type='text'></td><td><input type='text'></td><td><input type='text'></td><td><input type='text'></td><td><a class='change save'>保存</a></td></tr>;");
+  });
+
+  $(document).on('click','.save',function(){
+    var add_name=$(this).parent().prev().prev().prev().prev().children().val();
+    var add_phno=$(this).parent().prev().prev().prev().children().val();
+    var add_email=$(this).parent().prev().prev().children().val();
+    var add_address=$(this).parent().prev().children().val();
+    url="php/add.php";
+    $.post(url,{
+      name:add_name, 
+      phno:add_phno, 
+      email:add_email, 
+      address:add_address
+      },function(data){
+        $("#contact").html(data);
+      });
+  });
 });
