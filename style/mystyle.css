@@ -54,11 +54,11 @@ th{
   width: 100px;
 }
 
-.operate, .edit, .delete{
+.change{
   cursor: pointer;
 }
 
-.operate:hover, .edit:hover, .delete:hover{
+.change:hover{
   color: #545dd7;
   text-decoration: underline;
 }
