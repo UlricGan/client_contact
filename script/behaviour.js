@@ -5,9 +5,17 @@ $(document).ready(function(){
     var url="php/contact.php";
     url=url+"?name="+result;
     url=url+"&sid="+Math.random();
-    $.get(url,function(data){
-        $("#contact").html(data);
-      });
+    $.ajax({
+      url: url,
+      type: 'post',
+      beforeSend:function(){
+        $('#loading').addClass('load_c');
+      },
+      success: function(data){
+        $('#contact').html(data);
+        $('#loading').removeClass('load_c');
+      }
+    });
   });
   
   $(document).on('click','.operate',function(){
