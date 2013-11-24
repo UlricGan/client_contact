@@ -37,5 +37,6 @@
       <button type="button" id="edit" class="hide operate">编辑</button>
       <button type="button" id="delete" class="hide">删除</button>
     </div>
+    <div id="edit_tip"></div>
   </body>
 </html>

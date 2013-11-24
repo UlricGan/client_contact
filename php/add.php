@@ -16,18 +16,6 @@
   }else{
     $add_sql="insert into client_contact values ('$name','$phno','$email','$address')";
     mysql_query($add_sql,$con);
-    $sql="select * from client_contact";
-    $result=mysql_query($sql,$con);
-    while($row=mysql_fetch_array($result)){
-      echo "<tr>";
-      echo "<td><a class='delete'>删除</a></td>";
-      echo "<td >" . $row['name'] . "</td>";
-      echo "<td>" . $row['phno'] . "</td>";
-      echo "<td>" . $row['email'] . "</td>";
-      echo "<td>" . $row['address'] . "</td>";
-      echo "<td><a class='operate'>编辑</a></td>";
-      echo "</tr>";
-  }
   }
   mysql_close($con);
 ?>
