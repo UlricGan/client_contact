@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2013-11-15 02:38:46
+-- 生成日期: 2013-11-24 17:01:08
 -- 服务器版本: 5.6.14
 -- PHP 版本: 5.4.17
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `client_contact` (
   `name` char(20) NOT NULL,
-  `phno` int(11) NOT NULL,
+  `phno` bigint(20) NOT NULL,
   `email` char(40) DEFAULT NULL,
   `address` char(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -38,16 +38,15 @@ CREATE TABLE IF NOT EXISTS `client_contact` (
 --
 
 INSERT INTO `client_contact` (`name`, `phno`, `email`, `address`) VALUES
-('张三', 123456789, 'zhangsan@gmail.com', '上海市XX区XX路XX号'),
-('李四', 987654321, 'lisi@hotmail.com', '北京市XX区XX路XX'),
-('王五', 213456789, 'wangwu@163.com', '浙江杭州XX区XX路XX'),
-('张六', 312456789, 'zhangliu@gmail.com', '浙江宁波XX区XX路XX'),
-('朱四', 412356789, 'zhusi@gmail.com', '浙江温州XX区XX路XX'),
-('甘六', 162345789, 'ganliu@126.com', '浙江台州XX区XX路XX'),
-('何八', 172345689, 'heba@gmail.com', '浙江湖州XX区XX路XX'),
-('黑八', 182345679, '', '四川成都XX区XX路XX'),
-('黑十', 198765432, 'heishi@126.com', ''),
-('麦七', 192345678, 'maiqi@gmail.com', '四川乐山XX区XX路XX');
+('杨七', 698754321, 'yangqi@gmail.com1', '浙江绍兴XX区XX路XX11'),
+('加八', 21345678911, 'jiaba@gmail.com', '上海大学1号楼XX室'),
+('麦斯', 111111111, 'maisi@gmail.com', '上海大学3号楼XX室'),
+('原味', 1234567832242, 'yuanwei@126.com', '上海大学4号楼XX室'),
+('洁云', 4321567821134, 'jieyun@gmail.com', '上海大学6号楼XX室'),
+('评委', 1134567221, 'pingwei@163.com', '上海大学9号楼XX室'),
+('家宝', 2345671813, 'jiabao@qq.com', '上海大学0号楼XX室'),
+('氧吧', 90876543433, 'yangba@qq.com', '上海大学6号楼XX室'),
+('回复', 432156789, 'huifu@gamil.com', '四川成都XX街');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
