@@ -3,6 +3,57 @@
   font-family: 'Brokman-Regular','Helvetica Neue',Helvetica,sans-serif;
 }
 
+ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+dd,dt{
+  display: inline-block;
+  margin: 10px 0;
+}
+
+dt{
+  width: 100px;
+  text-align: right;
+}
+
+dd{
+  margin-left: 30px;
+}
+
+button{
+  cursor: pointer;
+}
+#contact_list{
+  float: left;
+}
+
+#main ul{
+  width: 300px;  
+}
+
+#main li{
+}
+
+#main a{
+  display: block;
+  border-top:1px #acacac dashed;
+  cursor: pointer;
+  padding: 5px 0;
+}
+
+
+#main a:hover{
+  background-color: #f0efef;
+}
+
+#main a.clicked{
+  background-color: #37657e;
+  color: #c9dfff;
+}
+
 .button{
   border: 1px #4e4e4e solid;
   width: 80px;
@@ -14,70 +65,11 @@
   cursor: pointer;
 }
 
-label{
-  display: inline-block;
-  width: 100px;
+#contact_detail{
+  float: left;
+  margin-left: 50px;
 }
 
-#main{
-  margin-top: 20px;
-  position: relative;
-}
-
-table{
-  border-collapse: collapse;
-  border: 1px black solid;
-  text-align: center;
-}
-
-td,th{
-  border: 1px #747474 solid;
-}
-
-th{
-  background-color: #86888a;
-}
-
-.c_name{
-  width: 100px;
-}
-
-.c_phno{
-  width: 150px;
-}
-
-.c_email{
-  width: 250px;
-}
-
-.c_address{
-  width: 250px;
-}
-
-.c_operate{
-  width: 100px;
-}
-
-.change{
-  cursor: pointer;
-}
-
-.change:hover{
-  color: #545dd7;
-  text-decoration: underline;
-}
-
-tr:nth-child(even){
-  background-color: #ccd0d2;
-}
-
-.load_c{
-  height: 128px;
-  width: 128px;
-  background-image: url(../images/loading_icon.gif);
-  background-position: left top;
-  background-repeat: no-repeat;
-  position: absolute;
-  left: 400px;
-  top:50px;
+.hide{
+  visibility: hidden;
 }

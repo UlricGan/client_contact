@@ -11,14 +11,9 @@
   $sql="select * from client_contact";
   $result=mysql_query($sql,$con);
   while($row=mysql_fetch_array($result)){
-    echo "<tr>";
-    echo "<td><a class='delete'>删除</a></td>";
-    echo "<td >" . $row['name'] . "</td>";
-    echo "<td>" . $row['phno'] . "</td>";
-    echo "<td>" . $row['email'] . "</td>";
-    echo "<td>" . $row['address'] . "</td>";
-    echo "<td><a class='operate'>编辑</a></td>";
-    echo "</tr>";
+    echo "<ul>";
+    echo "<li><a class='list_name'>" . $row['name'] . "</a></li>";
+    echo "</ul>";
   }
   mysql_close($con);
 ?>
