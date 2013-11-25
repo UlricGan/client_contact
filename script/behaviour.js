@@ -44,10 +44,8 @@ $(document).ready(function(){
         $.ajax({
           url: esurl,
           type: 'get',
-          success: function(datac){
-            $('#detail').html(datac);
-            $('.operate').removeClass('hide').attr('id','edit').text("编辑");
-            $('#delete').removeClass('hide');
+          success: function(edit_data){
+            $.showDl(edit_data);
           }
         });
       });
@@ -91,23 +89,17 @@ $(document).ready(function(){
       },function(datas){
         $("#contact").html(datas);
         $.ajax({
-          url: curl,
-          type: 'get',
-          beforeSend:function(){
-            $('#loading').addClass('load_c');
-          },
-          success: function(dataq){
-            $('#main').html(dataq);
-            $('#loading').removeClass('load_c');
-          }
-        });
-        $.ajax({
           url: surl,
           type: 'get',
-          success: function(datac){
-            $('#detail').html(datac);
-            $('.operate').removeClass('hide').attr('id','edit').text("编辑");
-            $('#delete').removeClass('hide');
+          success: function(add_data){
+            $.showDl(add_data);
+            $.ajax({
+              url: curl,
+              type: 'get',
+              success: function(dataq){
+                $('#main').html(dataq);
+              }
+            });
           }
         });
       });
@@ -125,11 +117,15 @@ $(document).ready(function(){
     $.ajax({
       url: url,
       type: 'get',
-      success: function(data){
-        $('#detail').html(data);
-        $('.operate').removeClass('hide').attr('id','edit').text("编辑");
-        $('#delete').removeClass('hide');
+      success: function(click_data){
+        $.showDl(click_data);
       }
     });
   });
+  
+  $.extend({showDl:function(data){
+        $('#detail').html("<dl><dt>姓名:</dt><dd id='choiced_name'>"+$.parseJSON(data).name+"</dd><br><dt>电话:</dt><dd id='choiced_phno'>"+$.parseJSON(data).phno+"</dd><br><dt>电子邮件:</dt><dd id='choiced_email'>"+$.parseJSON(data).email+"</dd><br><dt>地址:</dt><dd id='choiced_address'>"+$.parseJSON(data).address+"</dd></dl>");
+        $('.operate').removeClass('hide').attr('id','edit').text("编辑");
+        $('#delete').removeClass('hide');
+  }});
 });

@@ -28,5 +28,11 @@
         }
       });
     }
+    
+   $.extend({showDl:function(data){
+        $('#detail').html("<dl><dt>姓名:</dt><dd id='choiced_name'>"+$.parseJSON(data).name+"</dd><br><dt>电话:</dt><dd id='choiced_phno'>"+$.parseJSON(data).phno+"</dd><br><dt>电子邮件:</dt><dd id='choiced_email'>"+$.parseJSON(data).email+"</dd><br><dt>地址:</dt><dd id='choiced_address'>"+$.parseJSON(data).address+"</dd></dl>");
+        $('.operate').removeClass('hide').attr('id','edit').text("编辑");
+        $('#delete').removeClass('hide');
+  }}); 
   });
 </script>
