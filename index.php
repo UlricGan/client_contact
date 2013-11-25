@@ -15,21 +15,19 @@
       </form>
       <div id="main">
         <?php
-          $con=mysql_connect("127.0.0.1","root","0310");
-          if(!$con){
-            die('could not connect'. mysql_error());
-          }
-          mysql_query("set names 'utf8'");
-          mysql_select_db("test",$con);
+          require_once './php/config.php';
+		  
           $sql="select * from client_contact";
           $result=mysql_query($sql,$con);
           while($row=mysql_fetch_array($result)){
-            echo "<ul>";
-            echo "<li><a class='list_name'>" . $row['name'] . "</a></li>";
-            echo "</ul>";
+		?>
+		<ul>
+			<li><a class='list_name'><?php echo $row['name']; ?></a></li>
+		</ul>
+		<?php
           }
-          mysql_close($con);
-        ?>
+          require_once './php/destruct.php';
+		?>
       </div>
     </div>
     <div id="contact_detail">
