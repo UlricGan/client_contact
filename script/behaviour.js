@@ -41,16 +41,16 @@ $(document).ready(function(){
       address:edit_address
       },function(datae){
         $("#edit_tip").html(datae);
+        $.ajax({
+          url: esurl,
+          type: 'get',
+          success: function(datac){
+            $('#detail').html(datac);
+            $('.operate').removeClass('hide').attr('id','edit').text("编辑");
+            $('#delete').removeClass('hide');
+          }
+        });
       });
-    $.ajax({
-      url: esurl,
-      type: 'get',
-      success: function(datac){
-        $('#detail').html(datac);
-        $('.operate').removeClass('hide').attr('id','edit').text("编辑");
-        $('#delete').removeClass('hide');
-      }
-    });
   });
   
   $(document).on('click','#delete',function(){
@@ -90,27 +90,27 @@ $(document).ready(function(){
       address:add_address
       },function(datas){
         $("#contact").html(datas);
+        $.ajax({
+          url: curl,
+          type: 'get',
+          beforeSend:function(){
+            $('#loading').addClass('load_c');
+          },
+          success: function(dataq){
+            $('#main').html(dataq);
+            $('#loading').removeClass('load_c');
+          }
+        });
+        $.ajax({
+          url: surl,
+          type: 'get',
+          success: function(datac){
+            $('#detail').html(datac);
+            $('.operate').removeClass('hide').attr('id','edit').text("编辑");
+            $('#delete').removeClass('hide');
+          }
+        });
       });
-    $.ajax({
-      url: curl,
-      type: 'get',
-      beforeSend:function(){
-        $('#loading').addClass('load_c');
-      },
-      success: function(dataq){
-        $('#main').html(dataq);
-        $('#loading').removeClass('load_c');
-      }
-    });
-    $.ajax({
-      url: surl,
-      type: 'get',
-      success: function(datac){
-        $('#detail').html(datac);
-        $('.operate').removeClass('hide').attr('id','edit').text("编辑");
-        $('#delete').removeClass('hide');
-      }
-    });
   });
   
   $(document).on('click','.list_name',function(){
