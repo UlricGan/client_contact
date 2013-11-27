@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
   $("#cname").keyup(function(){
     var result=$("#cname").val();
     var url="php/search.php";
@@ -7,12 +8,8 @@ $(document).ready(function(){
     $.ajax({
       url: url,
       type: 'get',
-      beforeSend:function(){
-        $('#loading').addClass('load_c');
-      },
       success: function(data){
-        $('#main').html(data);
-        $('#loading').removeClass('load_c');
+        $.searchNa(data);
       }
     });
   });
@@ -57,7 +54,7 @@ $(document).ready(function(){
     url=url+"?name="+delete_name;
     url=url+"&sid="+Math.random();
     $.get(url,function(data){
-       $("#main").html(data);
+       $.searchNa(data);
        $("#detail").html('');
        $('.operate').addClass('hide');
        $('#delete').addClass('hide');
@@ -97,7 +94,7 @@ $(document).ready(function(){
               url: curl,
               type: 'get',
               success: function(dataq){
-                $('#main').html(dataq);
+                $.searchNa(dataq);
               }
             });
           }
@@ -127,5 +124,30 @@ $(document).ready(function(){
         $('#detail').html("<dl><dt>姓名:</dt><dd id='choiced_name'>"+$.parseJSON(data).name+"</dd><br><dt>电话:</dt><dd id='choiced_phno'>"+$.parseJSON(data).phno+"</dd><br><dt>电子邮件:</dt><dd id='choiced_email'>"+$.parseJSON(data).email+"</dd><br><dt>地址:</dt><dd id='choiced_address'>"+$.parseJSON(data).address+"</dd></dl>");
         $('.operate').removeClass('hide').attr('id','edit').text("编辑");
         $('#delete').removeClass('hide');
+  }});
+  
+  $.extend({searchNa:function(data){
+        var js_name=$.parseJSON(data);
+        var list_item='';
+        if(js_name.length){
+          for(i=0;i<js_name.length;i++){
+            list_item+="<li><a class='list_name'>"+js_name[i]+"</a></li>";   
+          }
+          $('#main').html("<ul>"+list_item+"</ul>");
+        }else{
+          $('#main').html("");
+        }
+        var nowClick=$('#choiced_name');
+        if(nowClick){
+          var nowClickText=nowClick.text();
+          var listName=$('.list_name');
+          listName.each(function(){
+            if($(this).text()===nowClickText){
+              if(!$(this).hasClass('clicked')){
+                $(this).addClass('clicked');
+              }
+            }
+          });
+        }
   }});
 });

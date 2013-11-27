@@ -6,11 +6,11 @@
   mysql_query($de_sql,$con);
   $sql="select * from client_contact";
   $result=mysql_query($sql,$con);
+  $js_result=array();
   while($row=mysql_fetch_array($result)){
-    echo "<ul>";
-    echo "<li><a class='list_name'>" . $row['name'] . "</a></li>";
-    echo "</ul>";
+    array_push($js_result, $row['name']);
   }
+  echo json_encode($js_result);
   
   require_once './destruct.php';
 ?>
