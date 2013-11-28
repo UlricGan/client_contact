@@ -3,17 +3,23 @@
   <head>
     <meta charset="utf-8">
     <title>Client Contact</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/mystyle.css">
     <script src="script/jquery-uncompressed-1.10.2.js" style="text/javascript"></script>
     <script src="script/behaviour.js" style="text/javascript"></script>
   </head>
   <body>
+    <div class="container">
     <div id="contact_list">
-      <form>
-        <input type="text" name="cname" placeholder="Name" id="cname">
-        <button type="button" class="button" id="add">Add</button>
+      <form class="navbar-form">
+        <div class="form-group">
+        <input type="text" name="cname" class="form-control input-lg" placeholder="Name" id="cname">
+        </div>
+        <button type="button" class="btn btn-default btn-lg" id="add">Add</button>
       </form>
       <div id="main">
+      <ul class="list-group">
         <?php
           require_once './php/config.php';
 		  
@@ -21,21 +27,27 @@
           $result=mysql_query($sql,$con);
           while($row=mysql_fetch_array($result)){
 		?>
-		<ul>
-			<li><a class='list_name'><?php echo $row['name']; ?></a></li>
-		</ul>
+			<li><a class='list_name list-group-item'><?php echo $row['name']; ?></a></li>
 		<?php
           }
           require_once './php/destruct.php';
 		?>
+      </ul>
+      <div class='glyphicon glyphicon-chevron-down down'></div>
+      <div class='glyphicon glyphicon-chevron-up up'></div>
       </div>
     </div>
     <div id="contact_detail">
       <div id="detail">
       </div>
-      <button type="button" id="edit" class="hide operate">编辑</button>
-      <button type="button" id="delete" class="hide">删除</button>
+      <div class="btn-group">
+        <button type="button" id="edit" class="hide operate btn btn-default btn-lg">编辑</button>
+        <button type="button" id="delete" class="hide btn btn-default btn-lg">删除</button>
+      </div>
     </div>
     <div id="edit_tip"></div>
+    </div>
+    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
   </body>
 </html>

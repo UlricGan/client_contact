@@ -23,25 +23,98 @@ dd{
   margin-left: 30px;
 }
 
-button{
-  cursor: pointer;
-}
 #contact_list{
   float: left;
 }
 
+#main{
+  position: relative;
+  margin-top: 23px;
+  width: 300px;
+}
+
 #main ul{
+  border-top: 4px #cdcdcd solid;
+  border-bottom: 4px #cdcdcd solid;
   width: 300px;  
+  height: 475px;
+  overflow-y: scroll;
+  position: relative;
 }
 
-#main li{
+#main .down, #main .up{
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+  position: absolute;
+  left: 45%;
 }
 
-#main a{
-  display: block;
+#main .down{
+  -webkit-animation:scrollDown 0.35s linear infinite alternate;
+  -moz-animation:scrollDown 0.35s linear infinite alternate;
+  -ms-animation:scrollDown 0.35s linear infinite alternate;
+  -o-animation:scrollDown 0.35s linear infinite alternate;
+  animation:scrollDown 0.35s linear infinite alternate;
+}
+
+#main .up{
+  -webkit-animation:scrollup 0.35s linear infinite alternate;
+  -moz-animation:scrollup 0.35s linear infinite alternate;
+  -ms-animation:scrollup 0.35s linear infinite alternate;
+  -o-animation:scrollup 0.35s linear infinite alternate;
+  animation:scrollup 0.35s linear infinite alternate;
+}
+
+@-webkit-keyframes scrollDown{
+  from {top:93%;}
+  to   {top:95%;}
+}
+@-moz-keyframes scrollDown{
+  from {top:93%;}
+  to   {top:95%;}
+}
+@keyframes scrollDown{
+  from {top:93%;}
+  to   {top:95%;}
+}
+@-o-keyframes scrollDown{
+  from {top:93%;}
+  to   {top:95%;}
+}
+
+@keyframes "scrollup" {
+ from {top: 3%;}
+ to {top: 1%;}
+}
+
+@-moz-keyframes scrollup {
+ from {top: 3%;}
+ to {top: 1%;}
+}
+
+@-webkit-keyframes "scrollup" {
+ from {top: 3%;}
+ to {top: 1%;}
+}
+
+@-ms-keyframes "scrollup" {
+ from {top: 3%;}
+ to {top: 1%;}
+}
+
+@-o-keyframes "scrollup" {
+ from {top: 3%;}
+ to {top: 1%;}
+}
+
+
+a{
+  /*display: block;
   border-top:1px #acacac dashed;
   cursor: pointer;
-  padding: 5px 0;
+  padding: 5px 0;*/
+  cursor: pointer;
 }
 
 
@@ -50,26 +123,27 @@ button{
 }
 
 #main a.clicked{
-  background-color: #37657e;
-  color: #c9dfff;
-}
-
-.button{
-  border: 1px #4e4e4e solid;
-  width: 80px;
-}
-
-.button:hover{
-  background-color: #424297;
+  background-color: #428bca;
   color: white;
-  cursor: pointer;
+}
+
+.navbar-form{
+  padding-left: 0;
 }
 
 #contact_detail{
   float: left;
   margin-left: 50px;
+  height: 550px;
+  position: relative;
+}
+
+.btn-group{
+  position: absolute;
+  bottom:0;
 }
 
 .hide{
   visibility: hidden;
 }
+

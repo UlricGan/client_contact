@@ -1,5 +1,13 @@
 $(document).ready(function(){
 
+  $(window).load(function(){
+    $.scrollIcon();
+  });
+  
+  $('#main ul').scroll(function(){
+    $.scrollIcon();
+  });
+  
   $("#cname").keyup(function(){
     var result=$("#cname").val();
     var url="php/search.php";
@@ -19,7 +27,7 @@ $(document).ready(function(){
     var old_email=$('#choiced_email').text();
     var old_phno=$('#choiced_phno').text();
     var old_name=$('#choiced_name').text();
-    $("#detail").html("<label for='edit_name'>名字</label><input type='text' id='edit_name' disabled='disabled' value='"+old_name+"'><br><label for='edit_phno'>电话</label><input type='text' id='edit_phno' value='"+old_phno+"'><br><label for='edit_email'>电子邮件</label><input type='text' id='edit_email' value='"+old_email+"'><br><label for='edit_address'>地址</label><input type='text' id='edit_address' value='"+old_address+"'>"); 
+    $("#detail").html("<form class='navbar-form'><div class='form-group'><label for='edit_name'>名字</label><input type='text' id='edit_name' disabled='disabled' class='form-control input-lg' value='"+old_name+"'><br><label for='edit_phno'>电话</label><input type='text' id='edit_phno' class='form-control input-lg' value='"+old_phno+"'><br><label for='edit_email'>电子邮件</label><input type='text' class='form-control input-lg' id='edit_email' value='"+old_email+"'><br><label for='edit_address'>地址</label><input type='text' id='edit_address' class='form-control input-lg' value='"+old_address+"'></div></form>"); 
     $('.operate').attr('id','edit_save').text("保存");
   });
   
@@ -49,23 +57,31 @@ $(document).ready(function(){
   });
   
   $(document).on('click','#delete',function(){
+    var result=$("#cname").val();
     var delete_name=$('#choiced_name').text();
-    url="php/delete.php"
-    url=url+"?name="+delete_name;
-    url=url+"&sid="+Math.random();
+    url="php/delete.php?name="+delete_name+"&sid="+Math.random();
+    var surl="php/search.php?name="+result+"&sid="+Math.random();
     $.get(url,function(data){
-       $.searchNa(data);
        $("#detail").html('');
        $('.operate').addClass('hide');
        $('#delete').addClass('hide');
+       $.ajax({
+         url: surl,
+         type: 'get',
+         success: function(datas){
+           $.searchNa(datas);
+          }
+        });
     });
   });
   
   $("#add").click(function() {
-     $("#detail").html("<label for='add_name'>名字</label><input type='text' id='add_name'><br><label for='add_phno'>电话</label><input type='text' id='add_phno'><br><label for='add_email'>电子邮件</label><input type='text' id='add_email'><br><label for='add_address'>地址</label><input type='text' id='add_address'>");
+     $("#detail").html("<form class='navbar-form'><div class='form-group'><label for='add_name'>名字</label><input type='text' id='add_name' class='form-control input-lg'><br><label for='add_phno'>电话</label><input type='text' id='add_phno' class='form-control input-lg'><br><label for='add_email'>电子邮件</label><input type='text' id='add_email' class='form-control input-lg'><br><label for='add_address'>地址</label><input type='text' id='add_address' class='form-control input-lg'></div></form>");
      $('.clicked').removeClass('clicked');
      $('#delete').removeClass('hide');
      $('.operate').removeClass('hide').attr('id','save').text("保存");
+     //alert($('#main li:last-child').offset().top);
+     //alert($('#main ul').scrollTop());
   });
 
   $(document).on('click','#save',function(){
@@ -131,12 +147,13 @@ $(document).ready(function(){
         var list_item='';
         if(js_name.length){
           for(i=0;i<js_name.length;i++){
-            list_item+="<li><a class='list_name'>"+js_name[i]+"</a></li>";   
+            list_item+="<li><a class='list_name list-group-item'>"+js_name[i]+"</a></li>";   
           }
-          $('#main').html("<ul>"+list_item+"</ul>");
+          $('#main .list-group').html(list_item);
         }else{
-          $('#main').html("");
+          $('#main .list-group').html("");
         }
+        $.scrollIcon();
         var nowClick=$('#choiced_name');
         if(nowClick){
           var nowClickText=nowClick.text();
@@ -145,9 +162,43 @@ $(document).ready(function(){
             if($(this).text()===nowClickText){
               if(!$(this).hasClass('clicked')){
                 $(this).addClass('clicked');
+                $(this).position().top=425;
               }
             }
           });
         }
+  }});
+  
+  $.extend({scrollIcon:function(){
+    var sIcon=$('#main .down');
+    var uIcon=$('#main .up')
+    var jj=$('#main ul li a');
+    if(jj.text()){
+      if($('#main li:last-child').position().top<=425){
+        if(!sIcon.hasClass('hidden')){
+          sIcon.addClass('hidden');
+        }
+      }else{
+        if(sIcon.hasClass('hidden')){
+          sIcon.removeClass('hidden');
+        }
+      }
+      if($('#main li:first-child').position().top<0){
+        if(uIcon.hasClass('hidden')){
+          uIcon.removeClass('hidden');
+        }
+      }else{
+        if(!uIcon.hasClass('hidden')){
+          uIcon.addClass('hidden');
+        }
+      }
+    }else{
+      if(!sIcon.hasClass('hidden')){
+        sIcon.addClass('hidden');
+      }
+      if(!uIcon.hasClass('hidden')){
+          uIcon.addClass('hidden');
+        }
+    }
   }});
 });
