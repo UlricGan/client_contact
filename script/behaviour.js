@@ -80,8 +80,7 @@ $(document).ready(function(){
      $('.clicked').removeClass('clicked');
      $('#delete').removeClass('hide');
      $('.operate').removeClass('hide').attr('id','save').text("保存");
-     //alert($('#main li:last-child').offset().top);
-     //alert($('#main ul').scrollTop());
+     alert($('#main ul').height()-$('#main li').height()+parseInt($('#main ul').css('borderTopWidth'))+parseInt($('#main ul').css('borderBottomWidth')));
   });
 
   $(document).on('click','#save',function(){
@@ -163,6 +162,10 @@ $(document).ready(function(){
               if(!$(this).hasClass('clicked')){
                 $(this).addClass('clicked');
                 $(this).position().top=425;
+                var firstLi=$('#main li:first').position().top;
+                var clickLi=$(this).position().top;
+                var cfLength=clickLi-firstLi;
+                $('#main ul').scrollTop(cfLength-$('#main ul').height()/2);
               }
             }
           });
@@ -171,34 +174,22 @@ $(document).ready(function(){
   
   $.extend({scrollIcon:function(){
     var sIcon=$('#main .down');
-    var uIcon=$('#main .up')
-    var jj=$('#main ul li a');
-    if(jj.text()){
-      if($('#main li:last-child').position().top<=425){
-        if(!sIcon.hasClass('hidden')){
-          sIcon.addClass('hidden');
-        }
+    var uIcon=$('#main .up');
+    var ul_bottom=$('#main ul').height()-$('#main li').height()+parseInt($('#main ul').css('borderTopWidth'))+parseInt($('#main ul').css('borderBottomWidth'));
+    if($('#main li a').text()){
+      if($('#main li:last-child').position().top<=ul_bottom){
+        sIcon.addClass('hidden');
       }else{
-        if(sIcon.hasClass('hidden')){
-          sIcon.removeClass('hidden');
-        }
+        sIcon.removeClass('hidden');
       }
       if($('#main li:first-child').position().top<0){
-        if(uIcon.hasClass('hidden')){
-          uIcon.removeClass('hidden');
-        }
+        uIcon.removeClass('hidden');
       }else{
-        if(!uIcon.hasClass('hidden')){
-          uIcon.addClass('hidden');
-        }
+        uIcon.addClass('hidden');
       }
     }else{
-      if(!sIcon.hasClass('hidden')){
         sIcon.addClass('hidden');
-      }
-      if(!uIcon.hasClass('hidden')){
-          uIcon.addClass('hidden');
-        }
+        uIcon.addClass('hidden');
     }
   }});
 });

@@ -83,7 +83,7 @@ dd{
   to   {top:95%;}
 }
 
-@keyframes "scrollup" {
+@keyframes scrollup {
  from {top: 3%;}
  to {top: 1%;}
 }
@@ -93,17 +93,17 @@ dd{
  to {top: 1%;}
 }
 
-@-webkit-keyframes "scrollup" {
+@-webkit-keyframes scrollup {
  from {top: 3%;}
  to {top: 1%;}
 }
 
-@-ms-keyframes "scrollup" {
+@-ms-keyframes scrollup {
  from {top: 3%;}
  to {top: 1%;}
 }
 
-@-o-keyframes "scrollup" {
+@-o-keyframes scrollup {
  from {top: 3%;}
  to {top: 1%;}
 }

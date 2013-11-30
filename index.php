@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/mystyle.css">
-    <script src="script/jquery-uncompressed-1.10.2.js" style="text/javascript"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="script/behaviour.js" style="text/javascript"></script>
   </head>
   <body>
@@ -33,8 +33,8 @@
           require_once './php/destruct.php';
 		?>
       </ul>
-      <div class='glyphicon glyphicon-chevron-down down'></div>
-      <div class='glyphicon glyphicon-chevron-up up'></div>
+      <span class='glyphicon glyphicon-chevron-down down'></span>
+      <span class='glyphicon glyphicon-chevron-up up'></span>
       </div>
     </div>
     <div id="contact_detail">
