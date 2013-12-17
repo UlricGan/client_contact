@@ -18,6 +18,7 @@ $(document).ready(function(){
       type: 'get',
       success: function(data){
         $.searchNa(data);
+        console.log(data);
       }
     });
   });
@@ -80,7 +81,6 @@ $(document).ready(function(){
      $('.clicked').removeClass('clicked');
      $('#delete').removeClass('hide');
      $('.operate').removeClass('hide').attr('id','save').text("保存");
-     alert($('#main ul').height()-$('#main li').height()+parseInt($('#main ul').css('borderTopWidth'))+parseInt($('#main ul').css('borderBottomWidth')));
   });
 
   $(document).on('click','#save',function(){
