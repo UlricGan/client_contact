@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/mystyle.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="script/behaviour.js" style="text/javascript"></script>
+    <script src="script/behaviour.js" type="text/javascript"></script>
   </head>
   <body>
     <div class="container">
@@ -47,7 +47,5 @@
     </div>
     <div id="edit_tip"></div>
     </div>
-    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
   </body>
 </html>
