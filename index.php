@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/mystyle.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="script/behaviour.js" style="text/javascript"></script>
+    <!--<script src="script/behaviour.js" style="text/javascript"></script>-->
   </head>
   <body>
     <div class="container">
@@ -20,7 +20,7 @@
       </form>
       <div id="main">
       <ul class="list-group">
-        <?php
+        <!--<?php
           require_once './php/config.php';
 		  
           $sql="select * from client_contact";
@@ -31,7 +31,7 @@
 		<?php
           }
           require_once './php/destruct.php';
-		?>
+		?>-->
       </ul>
       <span class='glyphicon glyphicon-chevron-down down'></span>
       <span class='glyphicon glyphicon-chevron-up up'></span>
@@ -47,7 +47,13 @@
     </div>
     <div id="edit_tip"></div>
     </div>
-    <script src="http://cdn.bootcss.com/jquery/1.10.2/jquery.min.js"></script>
+    
+    
     <script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <script src="script/json2.js"></script>
+    <script src="script/underscore.js"></script>
+    <script src="script/backbone.js"></script>
+    <script src="script/practice.js"></script>
+    <script type="text/template" id="client-view"></script>
   </body>
 </html>
