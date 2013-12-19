@@ -21,16 +21,13 @@
       <div id="main">
       <ul class="list-group">
         <?php
-          require_once './php/config.php';
-		  
-          $sql="select * from client_contact";
-          $result=mysql_query($sql,$con);
-          while($row=mysql_fetch_array($result)){
+		  require_once './php/model.php';
+		  $contact = new Contact();
+          foreach($contact->getList() as $row){
 		?>
 			<li><a class='list_name list-group-item'><?php echo $row['name']; ?></a></li>
 		<?php
           }
-          require_once './php/destruct.php';
 		?>
       </ul>
       <span class='glyphicon glyphicon-chevron-down down'></span>

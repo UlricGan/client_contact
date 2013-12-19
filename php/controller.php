@@ -4,31 +4,38 @@ require_once './model.php';
 
 $contact = new Contact();
 
-$id = isset($_GET['id']) ? $_GET['id'] : false;
+$uri_segments = explode('/',substr($_SERVER['REQUEST_URI'],1));
 
-$output = array();
+$id = isset($uri_segments[2]) ? $uri_segments[2] : null;
 
 switch($_SERVER['REQUEST_METHOD']){
-	case 'GET' && $id:
-		$output = $contact->fetch($id);
-		break;
-	
 	case 'GET':
-		$output = $contact->getList($_GET);
+		if($id){
+			$output = $contact->fetch($id);
+		}
+		else{
+			$output = $contact->getList($_GET);
+		}
+		
 		break;
 	
 	case 'POST':
-		$output = $contact->create($_POST);
+		$input_data = json_decode(file_get_contents('php://input'),JSON_OBJECT_AS_ARRAY);
+		$output = $contact->create($input_data);
 		break;
 	
 	case 'PUT':
-		$output = $contact->update($id, $_POST);
+		$input_data = json_decode(file_get_contents('php://input'),JSON_OBJECT_AS_ARRAY);
+		$contact->update($id, $input_data);
 		break;
 	
 	case 'DELETE':
-		$output = $contact->remove($id);
+		$contact->remove($id);
 		break;
 }
 
-echo json_encode($output);
+header('Content-Type: application/json');
+if(isset($output)){
+	echo json_encode($output);
+}
 
