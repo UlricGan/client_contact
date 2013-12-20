@@ -51,7 +51,7 @@
     <script src="script/json2.js"></script>
     <script src="script/underscore.js"></script>
     <script src="script/backbone.js"></script>
-    <script src="script/practice.js"></script>
+    <!--<script src="script/practice.js"></script>-->
     <script type="text/template" id="client-view"></script>
   </body>
 </html>
