@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="http://cdn.bootcss.com/twitter-bootstrap/3.0.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/mystyle.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <!--<script src="script/behaviour.js" style="text/javascript"></script>-->
   </head>
   <body>
@@ -20,7 +20,7 @@
       </form>
       <div id="main">
       <ul class="list-group">
-        <?php
+        <!--<?php
 		      require_once './php/model.php';
 		      $contact = new Contact();
           foreach($contact->getList() as $row){
@@ -28,21 +28,14 @@
         <li><a class='list_name list-group-item'><?php echo $row['name']; ?></a></li>
 		    <?php
           }
-        ?>
+        ?>-->
       </ul>
       <span class='glyphicon glyphicon-chevron-down down'></span>
       <span class='glyphicon glyphicon-chevron-up up'></span>
       </div>
     </div>
     <div id="contact_detail">
-      <div id="detail">
-      </div>
-      <div class="btn-group">
-        <button type="button" id="edit" class="hide operate btn btn-default btn-lg">编辑</button>
-        <button type="button" id="delete" class="hide btn btn-default btn-lg">删除</button>
-      </div>
-    </div>
-    <div id="edit_tip"></div>
+      <div id="detail"></div>
     </div>
 
     
@@ -51,7 +44,32 @@
     <script src="script/json2.js"></script>
     <script src="script/underscore.js"></script>
     <script src="script/backbone.js"></script>
-    <!--<script src="script/practice.js"></script>-->
-    <script type="text/template" id="client-view"></script>
+    <script src="script/practice.js"></script>
+    <script type="text/template" id="client-view">
+      <div class="showInfo">
+        <dl>
+          <dt>Name</dt>
+          <dd><%= name %></dd>
+          <dt>Phone</dt>
+          <dd><%= phone %></dd>
+          <dt>Email</dt>
+          <dd><%= email %></dd>
+          <dt>Address</dt>
+          <dd><%= address %></dd>
+        </dl>
+        <br/>
+        <input type="text" id="editName" value="<%= name %>"><br/>
+        <input type="text" id="editPhone" value="<%= phone %>"><br/>
+        <input type="text" id="editEmail" value="<%= email %>"><br/>
+        <input type="text" id="editAddress" value="<%= address %>">
+      </div>
+      <div class="btn-group">
+        <button type="button" id="edit" class="operate btn btn-default btn-lg">编辑</button>
+        <button type="button" id="delete" class="btn btn-default btn-lg">删除</button>
+      </div>
+    </script>
+    <script type="text/template" id="client-list">
+      <a class="list_name list-group-item"><%= name %></a>
+    </script>
   </body>
 </html>

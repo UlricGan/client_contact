@@ -147,3 +147,10 @@ a{
   visibility: hidden;
 }
 
+.showInfo input{
+  display: none;
+}
+
+.editInfo dl{
+  display: none;
+}

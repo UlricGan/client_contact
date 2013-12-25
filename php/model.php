@@ -8,7 +8,7 @@ class Contact{
 	
 	function __construct() {
 		
-		$this->connection = @mysql_connect("localhost","root","");
+		$this->connection = @mysql_connect("127.0.0.1","root","");
 		
 		if(!$this->connection){
 			throw new Exception('Database Error');

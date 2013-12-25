@@ -3,10 +3,11 @@ $(document).ready(function(){
 
 		defaults: function(){
 			return {
-				name : 'empity',
-				phone: 'empity',
-				email: 'empity',
-				address: 'empity'
+				id: '',
+				name : '',
+				phone: '',
+				email: '',
+				address: ''
 			};
 		}
 
@@ -14,95 +15,103 @@ $(document).ready(function(){
 
 
 	var ClientGroup=Backbone.Collection.extend({
-		model: Client
+		models: Client
 	});
 
 
-	var NameItem=Backbone.Model.extend({
-		defaults: function(){
-			return {
-				name: 'empity'
-			};
-		}
-	});
 
-	var Results=Backbone.Collection.extend({
-		model: NameItem,
+	var clients=new ClientGroup([{name:'d'+
+		'd',phone:23,email:'ddda',address:'ddsd'},{name:'ff'+
+		'f',phone:23,email:'ddda',address:'ddsd'}]);
 
-		url: 'php/search.php'
-	});
 
-	var clients=new ClientGroup();
-
-	var ClientView=Backbone.View.extend({
-
-		tagName: 'div',
+	var DetailView=Backbone.View.extend({
+		tagName:'div',
 
 		template: _.template($('#client-view').html()),
 
+		events: {
+			'click .operate' : 'editDetail',
+			'click .saveIt' : 'saveDetail',
+			'click #delete' : 'deleteDetail'
+		},
+
 		initialize: function(){
-			this.listenTo(this.model, 'change', this.render);
+			this.listenTo(this.model, 'remove', this.render);
 		},
 
 		render: function(){
 			this.$el.html(this.template(this.model.toJSON()));
 			return this;
-		}
+		},
 
+		editDetail: function(){
+			this.$('.showInfo').addClass('editInfo').removeClass('showInfo');
+			$('.operate').text('保存').addClass('saveIt').removeClass('operate');
+		},
+
+		saveDetail: function(){
+			this.model.set('name',this.$('#editName').val());
+			this.model.set('phone',this.$('#editPhone').val());
+			this.model.set('email',this.$('#editEmail').val());
+			this.model.set('address',this.$('#editAddress').val());
+			$('.editInfo').addClass('showInfo').removeClass('editInfo');
+			$('.saveIt').text('编辑').addClass('operate').removeClass('saveIt');
+		},
+
+		deleteDetail: function(){
+			this.model.destroy();
+			$('#detail').html('');
+		}
 	});
 
-	var NameList=Backbone.View.extend({
 
-		tagName: 'li',
+	var ItemView=Backbone.View.extend({
+		tagName:'li',
+
+		template: _.template($('#client-list').html()),
 
 		events: {
-			'click' : 'showDetail'
+			'click .list_name': 'showDetail'
 		},
 
 		initialize: function(){
-			this.listenTo(this.model, 'change', this.render);
+			this.listenTo(clients, 'change:name', this.render);
+			this.listenTo(this.model, 'change', this.showDetail);
 		},
 
 		render: function(){
-			this.$el.html(this.model.get('name'));
+			this.$el.html(this.template(this.model.toJSON()));
 			return this;
 		},
 
 		showDetail: function(){
-			var clientDetail=new ClientView({model: this.model});
-			this.$('#detail').html(clientDetail.render().el);
+			$('.clicked').removeClass('clicked');
+			this.$('.list_name').addClass('clicked');
+			var clientDetail=new DetailView({model:this.model});
+			$('#detail').html(clientDetail.render().el);
 		}
+
 	});
 
-	var ClientContact=Backbone.View.extend({
 
+	var App=Backbone.View.extend({
 		el: 'body',
 
-		events: {
-			'keyup #cname' : 'showResult',
-			'click #add' : 'addClient'
-		},
-
-		initialize: function(){
-			this.listenTo(clients, 'add' , this.appendClient);
+		initialize:function(){
+			this.listenTo(clients, 'change', this.render);
+			this.listenTo(clients, 'remove', this.render);
 			this.render();
 		},
 
-		render: function(){
-			this.searchResults=new Results();
-			this.searchResults.fetch();
-			this.searchResults.forEach(function(model){
-				//console.log(model.get('name'));
-				var listView= new NameList({model: model});
-				this.$('.list-group').append(listView.render().el);
+		render:function(){
+			$('.list-group').html('');
+			clients.forEach(function(client){
+				var item=new ItemView({model:client});
+				$('.list-group').append(item.render().el);
 			});
-			console.log('dd');
-			console.log(this.searchResults.url);
-			console.log(this.searchResults);
 		}
-
 	});
 
-	var contactApp= new ClientContact();
-
+	var myApp=new App();
 });
