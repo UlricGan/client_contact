@@ -10,6 +10,7 @@ $id = isset($uri_segments[2]) ? $uri_segments[2] : null;
 
 switch($_SERVER['REQUEST_METHOD']){
 	case 'GET':
+		echo 'ddd';
 		if($id){
 			$output = $contact->fetch($id);
 		}

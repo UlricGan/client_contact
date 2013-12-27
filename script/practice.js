@@ -15,14 +15,17 @@ $(document).ready(function(){
 
 
 	var ClientGroup=Backbone.Collection.extend({
-		models: Client
+		models: Client,
+		url: 'people'
 	});
 
 
 
-	var clients=new ClientGroup([{name:'d'+
+	/*var clients=new ClientGroup([{name:'d'+
 		'd',phone:23,email:'ddda',address:'ddsd'},{name:'ff'+
-		'f',phone:23,email:'ddda',address:'ddsd'}]);
+		'f',phone:23,email:'ddda',address:'ddsd'}]);*/
+	var clients=new ClientGroup();
+	//clients.fetch();
 
 
 	var DetailView=Backbone.View.extend({
@@ -105,6 +108,7 @@ $(document).ready(function(){
 		},
 
 		render:function(){
+			clients.fetch();
 			$('.list-group').html('');
 			clients.forEach(function(client){
 				var item=new ItemView({model:client});
