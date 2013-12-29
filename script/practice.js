@@ -5,11 +5,13 @@ $(document).ready(function(){
 			return {
 				id: '',
 				name : '',
-				phone: '',
+				phno: '',
 				email: '',
 				address: ''
 			};
-		}
+		},
+
+		url: 'people/'+this.id
 
 	});
 
@@ -25,8 +27,6 @@ $(document).ready(function(){
 		'd',phone:23,email:'ddda',address:'ddsd'},{name:'ff'+
 		'f',phone:23,email:'ddda',address:'ddsd'}]);*/
 	var clients=new ClientGroup();
-	//clients.fetch();
-
 
 	var DetailView=Backbone.View.extend({
 		tagName:'div',
@@ -55,9 +55,10 @@ $(document).ready(function(){
 
 		saveDetail: function(){
 			this.model.set('name',this.$('#editName').val());
-			this.model.set('phone',this.$('#editPhone').val());
+			this.model.set('phno',this.$('#editPhone').val());
 			this.model.set('email',this.$('#editEmail').val());
 			this.model.set('address',this.$('#editAddress').val());
+			this.model.save();
 			$('.editInfo').addClass('showInfo').removeClass('editInfo');
 			$('.saveIt').text('编辑').addClass('operate').removeClass('saveIt');
 		},
@@ -104,13 +105,14 @@ $(document).ready(function(){
 		initialize:function(){
 			this.listenTo(clients, 'change', this.render);
 			this.listenTo(clients, 'remove', this.render);
-			this.render();
+			this.listenTo(clients, 'all', this.render);
+			clients.fetch();
 		},
 
 		render:function(){
-			clients.fetch();
 			$('.list-group').html('');
 			clients.forEach(function(client){
+				console.log("dd");
 				var item=new ItemView({model:client});
 				$('.list-group').append(item.render().el);
 			});

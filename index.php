@@ -50,16 +50,19 @@
         <dl>
           <dt>Name</dt>
           <dd><%= name %></dd>
+          <br/>
           <dt>Phone</dt>
-          <dd><%= phone %></dd>
+          <dd><%= phno %></dd>
+          <br/>
           <dt>Email</dt>
           <dd><%= email %></dd>
+          <br/>
           <dt>Address</dt>
           <dd><%= address %></dd>
         </dl>
         <br/>
         <input type="text" id="editName" value="<%= name %>"><br/>
-        <input type="text" id="editPhone" value="<%= phone %>"><br/>
+        <input type="text" id="editPhone" value="<%= phno %>"><br/>
         <input type="text" id="editEmail" value="<%= email %>"><br/>
         <input type="text" id="editAddress" value="<%= address %>">
       </div>
