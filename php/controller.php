@@ -4,13 +4,12 @@ require_once './model.php';
 
 $contact = new Contact();
 
-$uri_segments = explode('/',substr($_SERVER['REQUEST_URI'],1));
-
-$id = isset($uri_segments[2]) ? $uri_segments[2] : null;
+$uri_segments = explode('/',substr($_SERVER['REQUEST_URI'],26));
+$id = isset($uri_segments[1])? $uri_segments[1] : null;
+//echo implode(',',$uri_segments);
 
 switch($_SERVER['REQUEST_METHOD']){
 	case 'GET':
-		echo 'ddd';
 		if($id){
 			$output = $contact->fetch($id);
 		}
