@@ -3,7 +3,6 @@ $(document).ready(function(){
 
 		defaults: function(){
 			return {
-				id: '',
 				name : '',
 				phno: '',
 				email: '',
@@ -36,6 +35,7 @@ $(document).ready(function(){
 		events: {
 			'click .operate' : 'editDetail',
 			'click .saveIt' : 'saveDetail',
+			'click .addIt' : 'addClient',
 			'click #delete' : 'deleteDetail'
 		},
 
@@ -63,6 +63,18 @@ $(document).ready(function(){
 			$('.saveIt').text('编辑').addClass('operate').removeClass('saveIt');
 		},
 
+		addClient: function(){
+			this.model.set('name',this.$('#editName').val());
+			this.model.set('phno',this.$('#editPhone').val());
+			this.model.set('email',this.$('#editEmail').val());
+			this.model.set('address',this.$('#editAddress').val());
+			clients.create(this.model);
+			$('.editInfo').addClass('showInfo').removeClass('editInfo');
+			$('.addIt').text('编辑').addClass('operate').removeClass('addIt');
+			var addItem=new ItemView({model:this.model});
+			addItem.showDetail();
+		},
+
 		deleteDetail: function(){
 			this.model.destroy();
 			$('#detail').html('');
@@ -81,7 +93,9 @@ $(document).ready(function(){
 
 		initialize: function(){
 			this.listenTo(clients, 'change:name', this.render);
+			//this.listenToOnce(clients, 'add', this.showDetail);
 			this.listenTo(this.model, 'change', this.showDetail);
+			this.listenTo(this.model, 'remove', this.remove);
 		},
 
 		render: function(){
@@ -90,11 +104,16 @@ $(document).ready(function(){
 		},
 
 		showDetail: function(){
+			console.log(this.model);
+			console.log('lll');
 			$('.clicked').removeClass('clicked');
+			console.log(this.$('.list_name'));
 			this.$('.list_name').addClass('clicked');
 			var clientDetail=new DetailView({model:this.model});
 			$('#detail').html(clientDetail.render().el);
-		}
+		},
+
+
 
 	});
 
@@ -102,20 +121,67 @@ $(document).ready(function(){
 	var App=Backbone.View.extend({
 		el: 'body',
 
+		events: {
+			'keyup #cname' : 'searchName',
+			'click #add' : 'showAdd'
+		},
+
 		initialize:function(){
-			this.listenTo(clients, 'change', this.render);
-			this.listenTo(clients, 'remove', this.render);
-			this.listenTo(clients, 'all', this.render);
+			this.listenTo(clients, 'add', this.addOne);
+			this.listenTo(clients, 'reset', this.addAll);
 			clients.fetch();
 		},
 
 		render:function(){
-			$('.list-group').html('');
-			clients.forEach(function(client){
-				console.log("dd");
-				var item=new ItemView({model:client});
-				$('.list-group').append(item.render().el);
-			});
+			//$('.list-group').html('');
+			console.log('render');
+		},
+
+		addOne: function(client){
+			console.log('addOne');
+			var item=new ItemView({model:client});
+			$('.list-group').append(item.render().el);
+		},
+
+		addAll: function(){
+			console.log('addAll');
+			clients.each(this.addOne);
+		},
+
+		searchName: function(){
+			var searchValue=$('#cname').val(),
+				searchResult=[],
+				regValue='',
+				matchValue;
+			if(!searchValue){
+				$('.list-group').html('');
+				clients.each(this.addOne);
+			}else{
+
+				console.log(searchValue);
+				for(var i=0; i<searchValue.length; i++){
+					regValue+='['+searchValue[i]+']+\\w*';
+				}
+				console.log(regValue);
+				matchValue=new RegExp(regValue);
+				console.log(matchValue);
+				clients.each(function(client){
+					if(client.get('name').search(matchValue)!=-1){
+						searchResult.push(client);
+					}
+				});
+				$('.list-group').html('');
+				searchResult.forEach(this.addOne);
+			}
+		},
+
+		showAdd: function(){
+			var newClient=new Client();
+			var addView=new DetailView({model:newClient});
+			//console.log(addView);
+			$('#detail').html(addView.render().el);
+			$('.showInfo').addClass('editInfo').removeClass('showInfo');
+			$('.operate').text('保存').addClass('addIt').removeClass('operate');
 		}
 	});
 
