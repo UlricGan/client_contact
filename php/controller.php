@@ -6,7 +6,7 @@ $contact = new Contact();
 
 $uri_segments = explode('/',substr($_SERVER['REQUEST_URI'],26));
 $id = isset($uri_segments[1])? $uri_segments[1] : null;
-//echo implode(',',$uri_segments);
+//echo $_SERVER['REQUEST_URI'];
 
 switch($_SERVER['REQUEST_METHOD']){
 	case 'GET':

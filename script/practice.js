@@ -10,7 +10,8 @@ $(document).ready(function(){
 			};
 		},
 
-		url: 'people/'+this.id
+		id: null
+		//url: 'people'
 
 	});
 
@@ -54,21 +55,18 @@ $(document).ready(function(){
 		},
 
 		saveDetail: function(){
-			this.model.set('name',this.$('#editName').val());
-			this.model.set('phno',this.$('#editPhone').val());
-			this.model.set('email',this.$('#editEmail').val());
-			this.model.set('address',this.$('#editAddress').val());
+			this.getInfo();
 			this.model.save();
 			$('.editInfo').addClass('showInfo').removeClass('editInfo');
 			$('.saveIt').text('编辑').addClass('operate').removeClass('saveIt');
 		},
 
 		addClient: function(){
-			this.model.set('name',this.$('#editName').val());
-			this.model.set('phno',this.$('#editPhone').val());
-			this.model.set('email',this.$('#editEmail').val());
-			this.model.set('address',this.$('#editAddress').val());
+			this.getInfo();
 			clients.create(this.model);
+			clients.fetch({id: null});
+			//console.log(this.model);
+			//console.log(clients);
 			$('.editInfo').addClass('showInfo').removeClass('editInfo');
 			$('.addIt').text('编辑').addClass('operate').removeClass('addIt');
 			var addItem=new ItemView({model:this.model});
@@ -78,6 +76,13 @@ $(document).ready(function(){
 		deleteDetail: function(){
 			this.model.destroy();
 			$('#detail').html('');
+		},
+
+		getInfo: function(){
+			this.model.set('name',this.$('#editName').val());
+			this.model.set('phno',this.$('#editPhone').val());
+			this.model.set('email',this.$('#editEmail').val());
+			this.model.set('address',this.$('#editAddress').val());
 		}
 	});
 
@@ -104,10 +109,10 @@ $(document).ready(function(){
 		},
 
 		showDetail: function(){
-			console.log(this.model);
-			console.log('lll');
+			//console.log(this.model);
+			//console.log('lll');
 			$('.clicked').removeClass('clicked');
-			console.log(this.$('.list_name'));
+			//console.log(this.$('.list_name'));
 			this.$('.list_name').addClass('clicked');
 			var clientDetail=new DetailView({model:this.model});
 			$('#detail').html(clientDetail.render().el);
@@ -134,13 +139,14 @@ $(document).ready(function(){
 
 		render:function(){
 			//$('.list-group').html('');
-			console.log('render');
+			//console.log('render');
 		},
 
 		addOne: function(client){
 			console.log('addOne');
 			var item=new ItemView({model:client});
 			$('.list-group').append(item.render().el);
+			//console.log(clients);
 		},
 
 		addAll: function(){
